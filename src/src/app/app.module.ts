@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ModelFormModule } from './components/model-form/model-form.module';
+import {StrategyModule} from './components/strategy/strategy.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ModelFormModule } from './components/model-form/model-form.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    ModelFormModule
+    ModelFormModule,
+    StrategyModule
   ],
   providers: [],
   bootstrap: [AppComponent]
