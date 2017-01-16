@@ -23,36 +23,29 @@ export class MovieFormModelBuilder {
                 spreadWeighingMode: ['', [Validators.required]],
                 priceFormat : ['', [Validators.required]],
                 tickSize : [undefined, [Validators.required]],
-                qtyWeighingMOde: ['', [Validators.required]],
-            })
+                qtyWeighingMode: ['', [Validators.required]],
+            }),
+            currentLeg : formBuilder.group({
+                id: [''],
+                source: ['', [Validators.required]],
+                instrument: ['', [Validators.required]],
+                refLeg : [undefined, [Validators.required]],
+                priceFactor: [undefined, [Validators.required]],
+                qtyFactor: [undefined, [Validators.required]],
+            }),
+            legs : formBuilder.array([])
         });
         return movieDefFG;
     }
-    getValidationMessages() :  { [key: string]: { [key: string]: string } } {
-        return {
-            alias : {
-                required : 'Alias is required field',
-                maxLength : 'Alias can have 16 chars at max'
-            },
-            description : {
-                required : 'Description is required field',
-                maxLength : 'Description can have 30 chars at max, (No special characters)'
-            },
-            displayQty : {
-                required : 'Display Quantity is required field'
-            },
-            dripSize : {
-                required : 'DripSize is required field'
-            },
-            maxLegAmount : {
-                required : 'Max Leg Amount is required field'
-            },
-            spreadWeighingMode : {
-                    required : 'Spread Weighting Mode is required'
-            },
-            priceFormat : {
-                required : 'Price Format is required'
-            }
+    
+    createNewLeg() : ITicketLeg {
+        return <ITicketLeg> {
+            id:'',
+            source: '',
+            instrument: '',
+            refLeg : false,
+            priceFactor: 1,
+            qtyFactor: 1
         };
     }
     // ********************FORM MODEL BUILDING [ENDS HERE] *******************
@@ -71,9 +64,10 @@ export class MovieFormModelBuilder {
                 spreadWeighingMode : 'YIELD',
                 priceFormat: 'decimal',
                 tickSize: .01,
-                qtyWeighingMOde: 'DV01'
+                qtyWeighingMode: 'DV01'
             },
-            // legs : []
+            currentLeg : this.createNewLeg(),
+            legs : []
         };
     }
     // **********************HELPER METHODS (ENDS HERE)*************************

@@ -20,6 +20,53 @@
             </span>
         </div>
     </div>
+    <!--LEGS-->
+    <div class="row mt-1" >
+        <div class="col">
+            <table class="table table-bordered table-sm">
+                <thead formGroupName="currentLeg">
+                    <tr>
+                        <th>Source</th>
+                        <th>Instrument</th>
+                        <th>Is Refleg</th>
+                        <th>Price Factor</th>
+                        <th>Quantity Factory</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" formControlName="id">
+                            <select formControlName="source">
+                            </select>
+                        </td>
+                        <td><select formControlName="instrument">
+                            </select>
+                        </td>
+                        <td><input type="checkbox" formControlName="refLeg"></td>
+                        <td><input type="number" formControlName="priceFactor"></td>
+                        <td><input type="number" formControlName="qtyFactor"></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" (click)="onAddUpdateLeg()">
+                                {{ movieDefinition.get('currentLeg.id').value ? 'Update' : 'Add'}}
+                            </button>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let leg of movieDefinition.legs">
+                        <td>{{leg.source}}</td>
+                        <td>{{leg.instrument}}</td>
+                        <td>{{leg.refLeg}}</td>
+                        <td>{{leg.priceFactor}}</td>
+                        <td>{{leg.qtyFactor}}</td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
      <div class="row">
         <div class="col">
             <label>Display Quantity</label>
@@ -79,7 +126,10 @@
                 <div class="row">
                     <div class="col">
                         <label >Weighting mode</label>
-                        <input type="text" class="form-control form-control-sm" formControlName="qtyWeighingMOde">
+                        <input type="text" class="form-control form-control-sm" formControlName="qtyWeighingMode">
+                        <span class="error" *ngIf="violations.qtyWeighingMode">
+                            {{violations.qtyWeighingMode}}
+                        </span>
                     </div>                    
                 </div>    
             </fieldset>

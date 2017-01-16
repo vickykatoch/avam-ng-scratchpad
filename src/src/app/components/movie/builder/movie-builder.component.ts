@@ -7,7 +7,9 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
-import { ValidationProcessor } from '../utils/validation-processor';
+import { ValidationProcessor } from '../validations/validation-processor';
+import { Validation } from '../validations/validations';
+import {IMovieDefinition, IFactor, ITicketLeg} from '../model/model';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
       constructor(private fb: FormBuilder,
                   private formModelBuilder: MovieFormModelBuilder) { 
                         this.validationProcessor 
-                              = new ValidationProcessor(formModelBuilder.getValidationMessages());
+                              = new ValidationProcessor(Validation.getValidationMessages());
       }
 
      
@@ -48,6 +50,23 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
       onValidationProcessed(evt: any) : void { 
             this.violations = this.validationProcessor.processMessages(this.movieDefinition);
             // debugger is not required;
+      }
+      onAddUpdateLeg(): void {
+            debugger;
+            let legGroup = this.movieDefinition.get('currentLeg');
+            let defObject = <IMovieDefinition>this.movieDefinition.value;
+            if(legGroup.valid) {
+                  let leg = <ITicketLeg>legGroup.value;
+                  if(leg.id) {
+                        
+                  } else {
+                        leg.id = "12";
+                        defObject.legs.push(leg); 
+                  }
+                  defObject.currentLeg = this.formModelBuilder.createNewLeg();
+                  this.movieDefinition.get('currentLeg').reset();
+                  this.movieDefinition.patchValue(defObject);
+            }
       }
       onSave() : void {
             console.log(this.movieDefinition.value);

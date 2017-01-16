@@ -5,16 +5,18 @@ export interface IMovieDefinition {
     dripSize : number;
     maxLegAmount; number;
     factor: IFactor;
+    currentLeg : ITicketLeg;
     legs: ITicketLeg[];
 }
 export interface IFactor {
     spreadWeighingMode : string;
     priceFormat: string;
     tickSize: number;
-    qtyWeighingMOde: string;
+    qtyWeighingMode: string;
 }
 
 export interface ITicketLeg {
+    id: string;
     source: string;
     instrument: string;
     refLeg : boolean;
