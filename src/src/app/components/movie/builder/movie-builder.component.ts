@@ -36,6 +36,7 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
             this.movieDefinition.setValue(this.formModelBuilder.createNewMovieDefinition());
       }
       ngAfterViewInit(): void {
+            
             // Watch for the blur event from any input element on the form.
             let controlBlurs: Observable<any>[] = this.formInputElements
                   .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));

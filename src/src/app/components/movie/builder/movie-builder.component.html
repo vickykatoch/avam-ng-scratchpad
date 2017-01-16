@@ -44,22 +44,31 @@
         </div>
 
     </div>
-    <div class="row">
+    <div formGroupName="factor" class="row">
         <div class="col-9">
             <fieldset>
                 <legend>Spread Calculations</legend>
                 <div class="row">
                     <div class="col">
                         <label >Weighting mode</label>
-                        <input type="text" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" formControlName="spreadWeighingMode">
+                        <span class="error" *ngIf="violations.spreadWeighingMode">
+                            {{violations.spreadWeighingMode}}
+                        </span>
                     </div>
                     <div class="col">
                         <label >Price Format</label>
-                        <input type="text" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" formControlName="priceFormat">
+                         <span class="error" *ngIf="violations.priceFormat">
+                            {{violations.priceFormat}}
+                        </span>
                     </div>
                     <div class="col">
                         <label >Tick Size</label>
-                        <input type="text" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" formControlName="tickSize">
+                        <span class="error" *ngIf="violations.tickSize">
+                            {{violations.tickSize}}
+                        </span>
                     </div>
                 </div>
             </fieldset>
@@ -70,7 +79,7 @@
                 <div class="row">
                     <div class="col">
                         <label >Weighting mode</label>
-                        <input type="text" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" formControlName="qtyWeighingMOde">
                     </div>                    
                 </div>    
             </fieldset>

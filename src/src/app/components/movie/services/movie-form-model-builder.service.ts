@@ -28,7 +28,7 @@ export class MovieFormModelBuilder {
         });
         return movieDefFG;
     }
-    getValidationMessages() : { [key: string]: { [key: string]: string } } {
+    getValidationMessages() :  { [key: string]: { [key: string]: string } } {
         return {
             alias : {
                 required : 'Alias is required field',
@@ -46,6 +46,12 @@ export class MovieFormModelBuilder {
             },
             maxLegAmount : {
                 required : 'Max Leg Amount is required field'
+            },
+            spreadWeighingMode : {
+                    required : 'Spread Weighting Mode is required'
+            },
+            priceFormat : {
+                required : 'Price Format is required'
             }
         };
     }
