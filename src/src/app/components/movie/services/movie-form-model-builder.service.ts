@@ -32,8 +32,7 @@ export class MovieFormModelBuilder {
                 refLeg : [undefined, [Validators.required]],
                 priceFactor: [undefined, [Validators.required]],
                 qtyFactor: [undefined, [Validators.required]],
-            }),
-            legs : formBuilder.array([])
+            })
         });
         return movieDefFG;
     }
@@ -66,7 +65,6 @@ export class MovieFormModelBuilder {
                 tickSize: .01,
                 qtyWeighingMode: 'DV01'
             },
-            currentLeg : this.createNewLeg(),
             legs : []
         };
     }

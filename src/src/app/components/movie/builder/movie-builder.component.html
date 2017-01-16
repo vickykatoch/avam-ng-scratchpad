@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="movieDefinition" (ngSubmit)="onSave()">
+<form novalidate [formGroup]="movieDefinitionFormGroup" (ngSubmit)="onSave()">
     <div class="row">
         <div class="col">
             <h3>Movie Definition Builder Form</h3>
@@ -36,10 +36,13 @@
                     <tr>
                         <td>
                             <input type="hidden" formControlName="id">
-                            <select formControlName="source">
+                            <select formControlName="source" (change)="onSourceChanged($event.target.value)">
+                                <option [value]="source.name" *ngFor="let source of sources">{{source.value}}</option>
                             </select>
                         </td>
-                        <td><select formControlName="instrument">
+                        <td>
+                            <select formControlName="instrument" >
+                                <option [value]="ins.name" *ngFor="let ins of instruments">{{ins.value}}</option>
                             </select>
                         </td>
                         <td><input type="checkbox" formControlName="refLeg"></td>
@@ -47,13 +50,13 @@
                         <td><input type="number" formControlName="qtyFactor"></td>
                         <td>
                             <button class="btn btn-primary btn-sm" (click)="onAddUpdateLeg()">
-                                {{ movieDefinition.get('currentLeg.id').value ? 'Update' : 'Add'}}
+                                {{ movieDefinitionFormGroup.get('currentLeg.id').value ? 'Update' : 'Add'}}
                             </button>
                         </td>
                     </tr>
                 </thead>
                 <tbody >
-                    <tr *ngFor="let leg of movieDefinition.legs">
+                    <tr *ngFor="let leg of movieDef.legs">
                         <td>{{leg.source}}</td>
                         <td>{{leg.instrument}}</td>
                         <td>{{leg.refLeg}}</td>
@@ -145,13 +148,13 @@
 <br>
 <div class="row mt-3">
     <div class="col">
-        IsDirty : {{ movieDefinition.dirty }},<br>
-        IsPristine : {{ movieDefinition.pristine }} ,<br>
-        Touched : {{ movieDefinition.touched }} ,<br>
-        UnTouched : {{ movieDefinition.untouched }} ,<br>
-        Valid : {{ movieDefinition.valid }} ,<br>
+        IsDirty : {{ movieDefinitionFormGroup.dirty }},<br>
+        IsPristine : {{ movieDefinitionFormGroup.pristine }} ,<br>
+        Touched : {{ movieDefinitionFormGroup.touched }} ,<br>
+        UnTouched : {{ movieDefinitionFormGroup.untouched }} ,<br>
+        Valid : {{ movieDefinitionFormGroup.valid }} ,<br>
 
         <strong>Movie Definition Object : </strong><br>
-        {{ movieDefinition.value | json : 4 }}
+        {{ movieDefinitionFormGroup.value | json : 4 }}
     </div>
 </div>
