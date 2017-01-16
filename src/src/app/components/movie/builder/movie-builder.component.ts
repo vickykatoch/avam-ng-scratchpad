@@ -24,7 +24,6 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
       violations: { [key: string]: string } = {};
       private validationProcessor: ValidationProcessor;
 
-
       constructor(private fb: FormBuilder,
                   private formModelBuilder: MovieFormModelBuilder) { 
                         this.validationProcessor 
@@ -33,7 +32,6 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
 
      
       ngOnInit() { 
-            debugger;
             this.movieDefinition  = this.formModelBuilder.createNewMovieDefinitionFormModel(this.fb);
             this.movieDefinition.setValue(this.formModelBuilder.createNewMovieDefinition());
       }
@@ -48,7 +46,7 @@ export class MovieBuilderComponent implements OnInit , AfterViewInit {
       }
       onValidationProcessed(evt: any) : void { 
             this.violations = this.validationProcessor.processMessages(this.movieDefinition);
-            // debugger;
+            // debugger is not required;
       }
       onSave() : void {
             console.log(this.movieDefinition.value);
